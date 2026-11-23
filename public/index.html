@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1b20">
+  <meta name="description" content="A miniature observatory inside a mechanical pocket watch. Watch The Sidereal Hour, a twelve-second Blender film, and explore its detail plates.">
+  <title>The Sidereal Hour — A pocket observatory</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="gallery.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#cinema">Skip to the film</a>
+  <header class="masthead">
+    <div class="masthead__inner bounds">
+      <span class="imprint">A pocket observatory</span>
+      <nav aria-label="On this page">
+        <a href="#cinema">Cinema</a>
+        <a href="#plates">Print plates</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="screening" id="cinema" aria-labelledby="film-title">
+      <div class="screening__inner bounds">
+        <div class="introduction">
+          <p class="eyebrow"><span class="bar" aria-hidden="true"></span>A short film in Blender</p>
+          <h1 id="film-title">The Sidereal <em>Hour</em></h1>
+          <p class="synopsis">A lantern keeper, a copper dome and a train of turning gears share the dial of a pocket watch.</p>
+          <div class="playback" aria-label="Playback options">
+            <a class="playlink primary" id="play-film" data-cut="film" href="media/film.mp4">
+              <span class="triangle" aria-hidden="true"></span> Play film <span class="duration">12s</span>
+            </a>
+            <a class="playlink secondary" data-cut="loop" href="media/loop.mp4">
+              Play loop <span class="duration">4s</span>
+            </a>
+          </div>
+        </div>
+        <figure class="cinema">
+          <div class="screen">
+            <video id="player" width="864" height="1080" controls playsinline preload="none" poster="media/still.png" aria-label="The Sidereal Hour, short film" aria-describedby="cut-caption">
+              <source src="media/film.mp4" type="video/mp4">
+              <a href="media/film.mp4">Open the short film</a>
+            </video>
+          </div>
+          <figcaption class="screen-meta">
+            <span id="cut-caption" aria-live="polite">Short film <span aria-hidden="true">/</span> 12 seconds</span>
+            <a href="media/still.png">Full-resolution still</a>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="plates" id="plates" aria-labelledby="plates-title">
+      <div class="bounds">
+        <div class="plates-head">
+          <h2 id="plates-title">The print <em>plates</em></h2>
+          <p>Open a plate to see it at full resolution.</p>
+        </div>
+
+        <figure class="plate wide">
+          <a class="plate-link" href="media/details.jpg" aria-labelledby="details-caption">
+            <img src="media/details.jpg" alt="Paired close-ups of the copper-domed observatory and the jeweled gear train that encircles its base." width="2100" height="1522" loading="lazy" decoding="async">
+          </a>
+          <figcaption><span id="details-caption">Detail studies</span><span class="plate-type">2100 × 1522</span></figcaption>
+        </figure>
+
+        <div class="plate-pair">
+          <figure class="plate">
+            <a class="plate-link" href="media/exploded.jpg" aria-labelledby="exploded-caption">
+              <img src="media/exploded.jpg" alt="Exploded construction drawing with the armillary, observatory, wheels and watch case separated into layers." width="1200" height="1500" loading="lazy" decoding="async">
+            </a>
+            <figcaption><span id="exploded-caption">Exploded assembly</span><span class="plate-type">1200 × 1500</span></figcaption>
+          </figure>
+          <figure class="plate">
+            <a class="plate-link" href="media/poster.jpg" aria-labelledby="poster-caption">
+              <img src="media/poster.jpg" alt="The Sidereal Hour cover, with the complete watch resting on a celestial chart above an ivory title band." width="1200" height="1500" loading="lazy" decoding="async">
+            </a>
+            <figcaption><span id="poster-caption">Film poster</span><span class="plate-type">1200 × 1500</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer><div class="bounds footer-inner"><span>The Sidereal <em>Hour</em></span><a href="#cinema">Back to cinema</a></div></footer>
+</body>
+</html>
