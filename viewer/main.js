@@ -180,16 +180,43 @@ async function initialize(root) {
     let fastFrames = 0;
     let drawnFrames = 0;
     let qualityChanged = 0;
+    let livePixelRatio = 1;
+    let stillPixelRatio = 1;
+    let stillTimer = 0;
+    let showingStill = false;
+    let dragging = false;
     const recentIntervals = [];
     const qualityScales = [1, .82, .65, .52];
     const up = new THREE.Vector3(0, 1, 0);
     const eyeDirection = () => camera.position.clone().sub(controls.target).normalize();
 
     function wake() {
-      if (ready && visible && !document.hidden && !frameId) {
-        frameId = requestAnimationFrame(draw);
+      if (!ready || !visible || document.hidden) return;
+      if (stillTimer) {
+        clearTimeout(stillTimer);
+        stillTimer = 0;
       }
+      if (showingStill) {
+        showingStill = false;
+        renderer.setPixelRatio(livePixelRatio * qualityScales[quality]);
+      }
+      if (!frameId) frameId = requestAnimationFrame(draw);
     }
+
+    function refinePausedView() {
+      if (dragging || playing || showingStill || stillTimer || renderer.getPixelRatio() >= stillPixelRatio) return;
+      // A single delayed redraw keeps key repeats and short gesture gaps cheap.
+      // Rendering at device resolution leaves mixer time and camera pose intact.
+      stillTimer = window.setTimeout(() => {
+        stillTimer = 0;
+        if (!ready || !visible || document.hidden || playing || dragging || goal || frameId) return;
+        showingStill = true;
+        renderer.setPixelRatio(stillPixelRatio);
+        renderer.shadowMap.needsUpdate = true;
+        renderer.render(scene, camera);
+      }, 220);
+    }
+
     // Measure intervals only while frames are being requested continuously.
     // Ignore initial material compilation; a single hitch never drops quality.
     function adapt(interval, time) {
@@ -240,7 +267,10 @@ async function initialize(root) {
       if (quality && playing && drawnFrames % (quality * 5) === 0) renderer.shadowMap.needsUpdate = true;
       renderer.render(scene, camera);
       if (goal || moved || (mixer && playing)) wake();
-      else last = 0;
+      else {
+        last = 0;
+        refinePausedView();
+      }
     }
 
     function fit(direction, instant = false) {
@@ -334,8 +364,10 @@ async function initialize(root) {
       const oldAspect = camera.aspect;
       camera.aspect = aspect;
       camera.updateProjectionMatrix();
-      const nativeRatio = Math.min(window.devicePixelRatio || 1, 1.65, Math.sqrt(1450000 / (width*height)));
-      renderer.setPixelRatio(nativeRatio * qualityScales[quality]);
+      const deviceRatio = window.devicePixelRatio || 1;
+      livePixelRatio = Math.min(deviceRatio, 1.65, Math.sqrt(1450000 / (width*height)));
+      stillPixelRatio = Math.min(deviceRatio, Math.sqrt(4096000 / (width*height)), renderer.capabilities.maxTextureSize / Math.max(width, height));
+      renderer.setPixelRatio(livePixelRatio * qualityScales[quality]);
       renderer.setSize(width, height, false);
       if (ready && Math.abs(oldAspect-aspect) > .04) fit(eyeDirection(), true);
       wake();
@@ -370,7 +402,8 @@ async function initialize(root) {
       setExpansion(0);
     }
 
-    controls.addEventListener('start', () => { goal = null; expansionView = null; wake(); });
+    controls.addEventListener('start', () => { dragging = true; goal = null; expansionView = null; wake(); });
+    controls.addEventListener('end', () => { dragging = false; wake(); });
     controls.addEventListener('change', wake);
     canvas.addEventListener('pointerdown', () => stage.focus({ preventScroll: true }));
     stage.addEventListener('keydown', event => {
