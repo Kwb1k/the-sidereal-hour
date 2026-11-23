@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1b20">
+  <meta name="description" content="Explore The Sidereal Hour in 3D. Turn the watch, separate its layers and inspect the working mechanism.">
+  <title>The Sidereal Hour in 3D — A pocket observatory</title>
+  <link rel="icon" type="image/webp" href="media/model-preview.webp">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="explore.css">
+  <script type="module" src="/viewer.js"></script>
+</head>
+<body class="model-page">
+  <a class="skip" href="#model">Skip to the 3D model</a>
+  <header class="masthead">
+    <div class="masthead__inner work-bounds">
+      <a class="imprint" href="./">A pocket observatory</a>
+      <nav aria-label="Gallery navigation">
+        <a href="./#cinema">Cinema</a>
+        <a href="./#plates">Print plates</a>
+        <a class="model-nav" href="explore.html" aria-current="page">3D model</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="work-bounds workbench" data-sidereal-viewer>
+    <div class="work-title">
+      <h1>The Sidereal <em>Hour</em></h1>
+      <span class="title-type">Interactive model</span>
+    </div>
+    <div class="workspace-grid">
+      <section class="observation" aria-label="Model inspection viewport">
+        <div class="viewport">
+          <div id="model" class="model-stage" data-viewer-stage data-viewer-state="loading" tabindex="0" role="region" aria-label="Interactive 3D pocket observatory" aria-describedby="model-help"></div>
+          <p class="stage-status" data-viewer-status role="status">Loading the watch…</p>
+          <noscript><p class="no-script">Enable JavaScript to turn the watch in 3D. <a href="media/still.png">Open the rendered still</a></p></noscript>
+        </div>
+        <div class="stage-caption">
+          <span id="model-help">Drag to orbit <span class="midpoint" aria-hidden="true">·</span> Pinch or scroll to zoom</span>
+          <a href="media/still.png">Rendered still</a>
+        </div>
+      </section>
+
+      <aside class="model-panel" aria-label="Model controls">
+        <section class="controls-section assembly-controls" aria-labelledby="assembly-title">
+          <div class="panel-heading"><h2 id="assembly-title">Mechanism</h2></div>
+          <button class="motion-toggle" type="button" data-viewer-play>Pause mechanism</button>
+          <div class="separation">
+            <div class="field-label">
+              <label for="layer-spacing">Layer separation</label>
+              <output for="layer-spacing" data-viewer-explode-value>0%</output>
+            </div>
+            <input id="layer-spacing" data-viewer-explode type="range" min="0" max="100" step="1" value="0">
+            <div class="range-limits" aria-hidden="true"><span>Assembled</span><span>Exploded</span></div>
+          </div>
+        </section>
+
+        <section class="controls-section camera-controls" aria-labelledby="camera-title">
+          <div class="panel-heading">
+            <h2 id="camera-title">View</h2>
+            <button type="button" class="reset" data-viewer-reset>Reset view</button>
+          </div>
+          <label class="field-label focus-label" for="component-focus">Frame component</label>
+          <div class="select-shell">
+            <select id="component-focus" data-viewer-focus>
+              <option value="all">Entire watch</option>
+              <option value="case">Watch case</option>
+              <option value="observatory">Observatory</option>
+              <option value="dome">Copper dome</option>
+              <option value="telescope">Telescope</option>
+              <option value="armillary">Lunar armillary</option>
+              <option value="gears">Gear train</option>
+              <option value="keeper">Lantern keeper</option>
+            </select>
+          </div>
+          <label class="isolation-switch">
+            <input type="checkbox" data-viewer-isolate disabled>
+            <span>Isolate component</span>
+          </label>
+          <div class="view-field" role="group" aria-labelledby="orbit-label">
+            <span id="orbit-label" class="field-label">Orbit</span>
+            <div class="camera-bank orbit-bank">
+              <button type="button" data-viewer-camera="left" aria-label="Orbit left">Left</button>
+              <button type="button" data-viewer-camera="right" aria-label="Orbit right">Right</button>
+              <button type="button" data-viewer-camera="up" aria-label="Orbit up">Up</button>
+              <button type="button" data-viewer-camera="down" aria-label="Orbit down">Down</button>
+            </div>
+          </div>
+          <div class="view-field" role="group" aria-labelledby="zoom-label">
+            <span id="zoom-label" class="field-label">Zoom</span>
+            <div class="camera-bank zoom-bank">
+              <button type="button" data-viewer-camera="out" aria-label="Zoom out"><span aria-hidden="true">−</span> Out</button>
+              <button type="button" data-viewer-camera="in" aria-label="Zoom in"><span aria-hidden="true">+</span> In</button>
+            </div>
+          </div>
+        </section>
+
+        <details class="model-help">
+          <summary>Keyboard and gestures</summary>
+          <p>Focus the model. Arrow keys orbit, Shift&nbsp;+&nbsp;arrows pan, and + or − zoom.</p>
+          <p>Drag with one finger to orbit. Use two fingers to pan or pinch to zoom. With a mouse, right-drag to pan.</p>
+        </details>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "the-sidereal-hour",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild viewer/main.js --bundle --minify --format=esm --target=es2020 --legal-comments=eof --outfile=public/viewer.js"
+  },
+  "dependencies": {
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12"
+  }
+}

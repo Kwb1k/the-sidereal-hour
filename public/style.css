@@ -98,3 +98,13 @@ footer { border-top: 1px solid var(--edge); }
 }
 @media (max-width: 23rem) { .bounds { width: calc(100% - 2rem); } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
+.model-nav { color: var(--copper); }
+.model-link { background: #243a3d; border-color: #63736b; color: #f0e4c9; }
+.model-link:hover { background: #31494b; }
+@media (max-width: 31rem) {
+  .masthead__inner { flex-wrap: wrap; gap: .45rem 1rem; padding-block: .65rem; }
+  .masthead__inner nav { gap: .9rem; }
+  .masthead__inner nav a[href="#cinema"] { display: none; }
+  .playback { gap: .55rem; }
+  .playlink { padding-inline: .8rem; }
+}

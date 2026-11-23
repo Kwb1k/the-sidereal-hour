@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#0b1b20">
   <meta name="description" content="A miniature observatory inside a mechanical pocket watch. Watch The Sidereal Hour, a twelve-second Blender film, and explore its detail plates.">
   <title>The Sidereal Hour — A pocket observatory</title>
+  <link rel="icon" type="image/webp" href="media/model-preview.webp">
   <link rel="stylesheet" href="style.css">
   <script src="gallery.js" defer></script>
 </head>
@@ -14,9 +15,10 @@
   <header class="masthead">
     <div class="masthead__inner bounds">
       <span class="imprint">A pocket observatory</span>
-      <nav aria-label="On this page">
+      <nav aria-label="Gallery navigation">
         <a href="#cinema">Cinema</a>
         <a href="#plates">Print plates</a>
+        <a class="model-nav" href="explore.html">3D model</a>
       </nav>
     </div>
   </header>
@@ -28,13 +30,14 @@
           <p class="eyebrow"><span class="bar" aria-hidden="true"></span>A short film in Blender</p>
           <h1 id="film-title">The Sidereal <em>Hour</em></h1>
           <p class="synopsis">A lantern keeper, a copper dome and a train of turning gears share the dial of a pocket watch.</p>
-          <div class="playback" aria-label="Playback options">
+          <div class="playback" aria-label="Explore the film and model">
             <a class="playlink primary" id="play-film" data-cut="film" href="media/film.mp4">
               <span class="triangle" aria-hidden="true"></span> Play film <span class="duration">12s</span>
             </a>
             <a class="playlink secondary" data-cut="loop" href="media/loop.mp4">
               Play loop <span class="duration">4s</span>
             </a>
+            <a class="playlink model-link" href="explore.html">Explore in 3D</a>
           </div>
         </div>
         <figure class="cinema">
